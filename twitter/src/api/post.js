@@ -78,4 +78,4 @@ route.delete("/:id", (req, res) => {
   });
 });
 
-export default post;
+export default route;

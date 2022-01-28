@@ -59,4 +59,4 @@ route.post("/register", (req, res) => {
   });
 });
 
-export default auth;
+export default route;
