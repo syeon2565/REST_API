@@ -21,6 +21,12 @@ let users = [
     password: "qwerty111@", // TYPE: string
   },
 ];
+route.get("/login", (req, res) => {
+  const { email, password } = req.body;
+  const user = users.find((users) => users.email);
+
+  res.json({ error: "User  exist" });
+});
 
 route.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -29,7 +35,7 @@ route.post("/login", (req, res) => {
     return res.json(users)({
       data: {
         user: {
-          id: user.id,
+          id: users.id,
         },
       },
     });
