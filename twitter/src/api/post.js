@@ -28,13 +28,13 @@ route.get("/", (req, res) => {
 
 // 개별 글 목록 조회
 route.get("/:id", (req, res) => {
-  const post = posts.findIndex((posts) => posts.id === +req.params.id);
+  const post = posts.findIndex(posts => posts.id === +req.params.id);
   if (post === -1) {
     return res.json({
       error: "Post not exist",
     });
   }
-  res.json(posts.filter((post) => post.id === +req.params.id)[0]);
+  res.json(posts.filter(post => post.id === +req.params.id)[0]);
 });
 
 //글 생성
@@ -49,7 +49,7 @@ route.post("/", (req, res) => {
 
 //글 개별 항목 수정
 route.put("/:id", (req, res) => {
-  const index = posts.findIndex((post) => post.id === +req.params.id);
+  const index = posts.findIndex(post => post.id === +req.params.id);
   if (index === -1) {
     return res.json({
       error: "Can not modify post",
@@ -66,13 +66,13 @@ route.put("/:id", (req, res) => {
 //포스트 삭제
 // 자신의 글 미완성
 route.delete("/:id", (req, res) => {
-  const index = posts.findIndex((posts) => posts.id === +req.params.id);
+  const index = posts.findIndex(posts => posts.id === +req.params.id);
   if (index === -1) {
     return res.json({
       error: "Can not delete post",
     });
   }
-  posts = posts.filter((posts) => posts.id !== +req.params.id);
+  posts = posts.filter(posts => posts.id !== +req.params.id);
   res.json({
     data: "Successfully deleted",
   });
