@@ -1,31 +1,38 @@
-import Sequelize from sequelize;
+import { Sequelize, Model } from "sequelize";
+import User from "./User";
 
-module.exports = class Follow extends Sequelize.Model {
+class Follow extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        following: {
+        followingId: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: {
+            model: User,
+            key: "id",
+          },
         },
-        follower: {
+        followerId: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: {
+            model: User,
+            key: "id",
+          },
         },
       },
       {
         sequelize,
         timestamps: false,
         underscored: false,
-        modelName: "Post",
-        tableName: "posts",
+        modelName: "Follow",
+        tableName: "follows",
         paranoid: false,
         charset: "utf8",
         collate: "utf8_general_ci",
-      }
+      },
     );
   }
-  static associate(db) {
-    db.Post.belongsTo(db.User, { foreignKey: "follower", tarkgetKey: "id" });
-  }
-};
+}
+export default Follow;
