@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import User from "./User";
 import Post from "./Post";
-import Follow from "./follow";
+import Follow from "./Follow";
 
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];

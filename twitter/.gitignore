@@ -1,3 +1,7 @@
 /node_modules
 /src/config
+<<<<<<< HEAD
 .env
+=======
+test.db
+>>>>>>> origin/master
