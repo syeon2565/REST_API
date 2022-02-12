@@ -1,4 +1,5 @@
 import { Router } from "express";
+import checkLogin from "../middlewares/checkLogin";
 
 const route = Router();
 
@@ -27,7 +28,7 @@ route.get("/", (req, res) => {
 });
 
 // 개별 글 목록 조회
-route.get("/:id", (req, res) => {
+route.get("/:id", checkLogin, (req, res) => {
   const post = posts.findIndex(posts => posts.id === +req.params.id);
   if (post === -1) {
     return res.json({
@@ -38,7 +39,7 @@ route.get("/:id", (req, res) => {
 });
 
 //글 생성
-route.post("/", (req, res) => {
+route.post("/", checkLogin, (req, res) => {
   posts.push({
     id: nextId++,
     content: req.body.content,
@@ -48,7 +49,7 @@ route.post("/", (req, res) => {
 });
 
 //글 개별 항목 수정
-route.put("/:id", (req, res) => {
+route.put("/:id", checkLogin, (req, res) => {
   const index = posts.findIndex(post => post.id === +req.params.id);
   if (index === -1) {
     return res.json({
@@ -65,7 +66,7 @@ route.put("/:id", (req, res) => {
 
 //포스트 삭제
 // 자신의 글 미완성
-route.delete("/:id", (req, res) => {
+route.delete("/:id", checkLogin, (req, res) => {
   const index = posts.findIndex(posts => posts.id === +req.params.id);
   if (index === -1) {
     return res.json({
