@@ -1,7 +1,7 @@
 import { Router } from "express";
+import User from "../models/User";
 
 const route = Router();
-
 let nextId = 4;
 
 let users = [
@@ -24,14 +24,14 @@ let users = [
 
 route.get("/login", (req, res) => {
   const { email, password } = req.body;
-  const user = users.find((users) => users.email);
+  const user = users.find(users => users.email);
 
   res.json({ error: { message: "User  exist" } });
 });
 
 route.post("/login", (req, res) => {
   const { email, password } = req.body;
-  const user = users.find((users) => users.email);
+  const user = users.find(users => users.email);
   if (user && user.password === password) {
     return res.json(users)({
       data: {
@@ -46,7 +46,7 @@ route.post("/login", (req, res) => {
 
 route.post("/register", (req, res) => {
   const { email, password } = req.body;
-  const user = users.find((users) => users.email);
+  const user = users.find(users => users.email);
   if (user) {
     return res.json({
       error: "User already exist",
@@ -60,7 +60,7 @@ route.post("/register", (req, res) => {
   res.json({
     data: {
       user: {
-        id: users.find((user) => users.email === email).id, // 생성된 유저의 ID값
+        id: users.find(user => users.email === email).id, // 생성된 유저의 ID값
       },
     },
   });

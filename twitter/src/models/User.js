@@ -1,16 +1,16 @@
-const Sequelize = require("sequelize");
+import { Sequelize, Model } from "sequelize";
 
-module.exports = class User extends Sequelize.Model {
+class User extends Model {
   static init(sequelize) {
     return super.init(
       {
         email: {
-          type: Sequelize.STRING(20),
+          type: Sequelize.STRING,
           allowNull: false,
           unique: true,
         },
         password: {
-          type: Sequelize.STRING(20),
+          type: Sequelize.STRING,
           allowNull: false,
         },
       },
@@ -29,4 +29,5 @@ module.exports = class User extends Sequelize.Model {
   static associate(db) {
     db.User.hasMany(db.Post, { foreignKey: "Poster", sourceKey: "id" });
   }
-};
+}
+export default User;

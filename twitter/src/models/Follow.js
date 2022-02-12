@@ -1,15 +1,15 @@
-import { Sequelize, Model } from "sequelize";
+import Sequelize from sequelize;
 
-class Post extends Model {
+module.exports = class Follow extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        content: {
-          type: Sequelize.STRING,
+        following: {
+          type: Sequelize.INTEGER,
           allowNull: false,
         },
-        writer: {
-          type: Sequelize.STRING,
+        follower: {
+          type: Sequelize.INTEGER,
           allowNull: false,
         },
       },
@@ -22,11 +22,10 @@ class Post extends Model {
         paranoid: false,
         charset: "utf8",
         collate: "utf8_general_ci",
-      },
+      }
     );
   }
   static associate(db) {
-    db.Post.belongsTo(db.User, { foreignKey: "Poster", tarkgetKey: "id" });
+    db.Post.belongsTo(db.User, { foreignKey: "follower", tarkgetKey: "id" });
   }
-}
-export default Post;
+};
